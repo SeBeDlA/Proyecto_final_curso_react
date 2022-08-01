@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useContext, useEffect, useState, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../Utils/firebaseConfig";
@@ -48,6 +48,12 @@ const AuthContextProvider = ({children}) => {
 
   const resetPassword = (email) => sendPasswordResetEmail(auth, email);
 
+  const updateUser = (data) => {
+    return updateProfile(auth.currentUser, data)
+    .then(() => {return {type: 'success'}})
+    .catch((error) => {return {type: 'error'}})
+  }
+
   useEffect( () => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
@@ -55,7 +61,7 @@ const AuthContextProvider = ({children}) => {
     });
   }, [])
   return (
-    <AuthContext.Provider value={{error, signup, user, logout, loginWithGoogle, resetPassword, login}}>
+    <AuthContext.Provider value={{error, signup, user, logout, loginWithGoogle, resetPassword, login, updateUser}}>
       {children}
     </AuthContext.Provider>
   )

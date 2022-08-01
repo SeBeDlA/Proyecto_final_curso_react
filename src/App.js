@@ -6,7 +6,9 @@ import Cart from "./Pages/Cart";
 import Detail from "./Pages/Detail";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
+import MyProfile from "./Pages/MyProfile";
 import Register from "./Pages/Register";
+import Shoppins from "./Pages/Shoppins";
 import Store from "./Pages/Store";
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
               <Route path='/store/pag/:pag' element={<Store />}></Route>
               <Route path='/product/:id' element={<Detail />}></Route>
               <Route path='/cart' element={<Cart />}></Route>
+              <Route path='/myprofile' element={<MyProfile />}></Route>
+              <Route path='/myprofile/shoppings' element={<Shoppins />}></Route>
             </Routes>
           </div>
         </AuthContextProvider>

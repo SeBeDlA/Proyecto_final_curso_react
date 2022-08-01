@@ -21,7 +21,6 @@ const Login = (props) => {
   }
 
   const handleSubmit = (e) => {
-    console.log(e)
     e.preventDefault();
     login(user.email, user.password)
   }

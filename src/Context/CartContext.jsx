@@ -13,6 +13,8 @@ const CartContextProvider = ({children}) => {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [paginas, setPaginas] = useState(0);
   const [totalProductos, setTotalProductos] = useState(0)
+  const [categoryFilter, setCategoryFilter] = useState(0)
+  const [nameFilter, setNameFilter] = useState('')
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,8 +26,15 @@ const CartContextProvider = ({children}) => {
       console.log("pag: ",location.index)
       pag = location.pathname.substr(11);
     }
-    getApiProducts(pag)
-  }, [location])
+    let name = (nameFilter == '')?null:nameFilter
+    let category = (categoryFilter == 0)?null:categoryFilter
+    getApiProducts(pag, category, name)
+  }, [location, categoryFilter, nameFilter])
+  
+  useEffect(()=>{
+    setCategoryFilter(0)
+    setNameFilter('')
+  },[location])
 
   useEffect(()=>{
     console.log("productCart: ",productsCart)
@@ -40,8 +49,8 @@ const CartContextProvider = ({children}) => {
     setProductsCart(productosjson)
   }
 
-  const getApiProducts = (pag = null) => {
-    getProducts(pag).then(resp => {
+  const getApiProducts = (pag = null, categoryId = null, name = null) => {
+    getProducts(pag, categoryId, name).then(resp => {
       console.log("Productos => ",resp)
       setLoadingProducts(false);
       // getCartProducts();
@@ -53,7 +62,6 @@ const CartContextProvider = ({children}) => {
   const addToCart = (item, qty) => {
     let aux = []
     let found = false
-    console.log("productcart => ",productsCart.length);
     productsCart.map(itemList => {
       let itemAux = itemList
       if(item.id == itemList.id){
@@ -84,7 +92,7 @@ const CartContextProvider = ({children}) => {
   }
   
   return (
-    <CartContext.Provider value={{getCartProducts, products, paginas, productsCart, loadingProducts, addToCart, removeItem, getTotal, totalProductos}}>
+    <CartContext.Provider value={{getCartProducts, products, paginas, productsCart, loadingProducts, addToCart, removeItem, getTotal, totalProductos, setCategoryFilter, categoryFilter, nameFilter, setNameFilter}}>
       {children}
     </CartContext.Provider>
   )

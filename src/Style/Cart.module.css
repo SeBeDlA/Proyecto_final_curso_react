@@ -13,7 +13,8 @@
 }
 .product{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 25px 25px 0px 0px
 }
 .productDetail{
   flex: 2;

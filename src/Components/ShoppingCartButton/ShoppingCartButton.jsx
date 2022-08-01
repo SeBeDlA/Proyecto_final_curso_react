@@ -11,10 +11,10 @@ export default function ShoppingCartButton() {
       <IconButton aria-label="cart">
         { cartContext.productsCart.length > 0?(
           <Badge badgeContent={cartContext.totalProductos} color="warning">
-            <ShoppingCartIcon color='#000000'/>
+            <ShoppingCartIcon color='#ffffff'/>
           </Badge>
         ): (
-          <ShoppingCartIcon color='#000000'/>
+          <ShoppingCartIcon color='#ffffff'/>
         )}
       </IconButton>
     </>
