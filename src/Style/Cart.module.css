@@ -1,0 +1,66 @@
+.wrapperCart{
+  padding: 20px;
+} 
+.titleCart{
+  font-weight: 300;
+  text-align: center;
+} 
+.contentCart{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 2;
+}
+.product{
+  display: flex;
+  justify-content: space-between;
+}
+.productDetail{
+  flex: 2;
+  display: flex;
+}
+.imageCart{
+  width: 200px;
+}
+.details{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.priceDetail{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.productAmountContainer{
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+.productAmount{
+  font-size: 24px;
+  margin: 5px;
+}
+.productPrice{
+  font-size: 30px;
+  font-weight: 200;
+}
+.resumeShop{
+  flex: 1;
+}
+.containerCart{
+  display: flex;
+}
+.resumeShopContent{
+  border: solid 1px #000;
+}
+.resumeShopTitle{
+  font-size: 24px;
+  padding: 10px;
+}
+.resumeShopShipping{
+  font-size: 18px;
+} 
