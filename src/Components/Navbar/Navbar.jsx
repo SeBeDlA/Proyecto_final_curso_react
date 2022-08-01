@@ -19,7 +19,7 @@ export default function Navbar() {
             <Link className='mr-5' to='/store/pag/1' style={{textDecoration: "none", color: "white"}}><div className={s.menuItem}>STORE</div></Link>      
             {auth.user == null && (<Link to='/register'><div className={s.menuItem}>REGISTER</div></Link>)}
             {auth.user == null && (<Link to='/login'><div className={s.menuItem}>SIGN IN</div></Link>)}
-            <div className={s.menuItem}><ShoppingCartButton/></div>
+            <Link to="/cart" className={s.menuItem}><ShoppingCartButton/></Link>
             <ProfileAvatarButton />
           </div>
         </div>

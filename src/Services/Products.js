@@ -1,4 +1,4 @@
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../Utils/firebaseConfig";
 
 export function getProducts(pag = null, categoryId = null, name = null){
@@ -27,6 +27,23 @@ export function getCategory(){
   .catch(error => error.json());
 }
 export function createShop(data){
-  const shoppingRef = doc(db, 'Shoppings');
-  return setDoc(shoppingRef,data)
+  console.log("data => ",data)
+  const shoppingRef = collection(db,  'Shopping');
+  return addDoc(shoppingRef,data)
+}
+export async function getShoppingUser(uid){
+  console.log("uid: ",uid)
+  const q = query(collection(db,'Shopping'), where("user.uid", '==', uid))
+  const querySnapshot = await getDocs(q)
+  let aux = []
+  querySnapshot.forEach(doc => {
+    console.log("doc: ",doc.data())
+    aux.push({...doc.data(), id: doc.id})
+  })
+  return aux
+}
+export async function getOrder(id){
+  const docRef = doc(db, "Shopping", id);
+  const docSnap = await getDoc(docRef);
+  return {id: docSnap.id, ...docSnap.data()}
 }

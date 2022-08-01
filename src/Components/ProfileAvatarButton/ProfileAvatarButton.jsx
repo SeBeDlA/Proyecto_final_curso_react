@@ -85,7 +85,7 @@ const ProfileAvatarButton = () => {
                     onKeyDown={handleListKeyDown}
                   >
                     <MenuItem onClick={() => {handleClose();navigate('/myprofile')}}>Profile</MenuItem>
-                    <MenuItem onClick={() => {handleClose();navigate('/myprofile/shoppings')}}>My Shopping</MenuItem>
+                    <MenuItem onClick={() => {handleClose();navigate('/myprofile/shoppings')}}>My Orders</MenuItem>
                     <MenuItem onClick={() => {handleClose();auth.logout()}}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>

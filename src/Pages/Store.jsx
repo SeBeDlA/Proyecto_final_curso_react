@@ -1,4 +1,4 @@
-import { CircularProgress, IconButton, InputAdornment, MenuItem, Select, TextField } from '@mui/material';
+import { Button, CircularProgress, IconButton, InputAdornment, MenuItem, Select, TextField } from '@mui/material';
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import ItemListContainer from '../Components/ItemListContainer/ItemListContainer'
@@ -60,7 +60,7 @@ const Store = (props) => {
                 }} 
               />
             </div>
-            <div className='w-1/2'>
+            <div className='mr-5'>
               <Select
                 id="category-filter"
                 value={cart.categoryFilter}
@@ -68,8 +68,13 @@ const Store = (props) => {
                 onChange={handlechangeCategory}
               >
                 <MenuItem value={0}>Todos</MenuItem>
-                {categorias.map(item=><MenuItem value={item.id}>{item.name}</MenuItem>)}
+                {categorias.map(item=><MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>)}
               </Select>
+            </div>
+            <div className='mr-5 align-middle flex'>
+              <Button
+                onClick={()=>{setName('');cart.setCategoryFilter(0);cart.setNameFilter('')}}
+              >Clear</Button>
             </div>
           </div>
           <ItemListContainer items={cart.products}/>

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState, createContext } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getProducts } from "../Services/Products";
+import { useAuth } from "./AuthContext";
 
 export const CartContext = createContext();
 export const useCart = () => {
@@ -17,13 +18,12 @@ const CartContextProvider = ({children}) => {
   const [nameFilter, setNameFilter] = useState('')
   const navigate = useNavigate();
   const location = useLocation();
+  const auth = useAuth();
 
   useEffect(() => {
-    console.log("location: ",location)
     setLoadingProducts(true)
     let pag = null;
     if(location.pathname.indexOf('/store/pag') != -1){
-      console.log("pag: ",location.index)
       pag = location.pathname.substr(11);
     }
     let name = (nameFilter == '')?null:nameFilter
@@ -32,9 +32,12 @@ const CartContextProvider = ({children}) => {
   }, [location, categoryFilter, nameFilter])
   
   useEffect(()=>{
-    setCategoryFilter(0)
-    setNameFilter('')
-  },[location])
+    setTotalProductos(getTotalProductItem())
+  },[productsCart])
+
+  useEffect(()=>{
+    navigate('/store/pag/1')
+  },[categoryFilter, nameFilter])
 
   useEffect(()=>{
     console.log("productCart: ",productsCart)
@@ -49,9 +52,16 @@ const CartContextProvider = ({children}) => {
     setProductsCart(productosjson)
   }
 
+  const getTotalProductItem = () => {
+    let aux = 0;
+    productsCart.map(item=>{
+      aux += item.qty;
+    })
+    return aux
+  }
+
   const getApiProducts = (pag = null, categoryId = null, name = null) => {
     getProducts(pag, categoryId, name).then(resp => {
-      console.log("Productos => ",resp)
       setLoadingProducts(false);
       // getCartProducts();
       setProducts(resp.products);
@@ -68,11 +78,10 @@ const CartContextProvider = ({children}) => {
         found = true
         itemAux.qty += qty
       }
-      setTotalProductos(totalProductos+qty)
       aux.push(itemAux)
     })
+    setTotalProductos(totalProductos+qty)
     if(!found) aux.push({qty, ...item})
-    
     setProductsCart(aux);
   }
 
@@ -90,9 +99,14 @@ const CartContextProvider = ({children}) => {
     })
     return total;
   }
+
+  const clearCart = () =>{
+    setProductsCart([])
+  }
   
+
   return (
-    <CartContext.Provider value={{getCartProducts, products, paginas, productsCart, loadingProducts, addToCart, removeItem, getTotal, totalProductos, setCategoryFilter, categoryFilter, nameFilter, setNameFilter}}>
+    <CartContext.Provider value={{getCartProducts, products, paginas, productsCart, loadingProducts, addToCart, removeItem, getTotal, totalProductos, setCategoryFilter, categoryFilter, nameFilter, setNameFilter, clearCart}}>
       {children}
     </CartContext.Provider>
   )
