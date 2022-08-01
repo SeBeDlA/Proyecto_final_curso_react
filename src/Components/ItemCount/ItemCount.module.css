@@ -1,0 +1,9 @@
+.productAmountContainer{
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+.productAmount{
+  font-size: 24px;
+  margin: 5px;
+}

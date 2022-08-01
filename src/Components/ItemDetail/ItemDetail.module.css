@@ -1,0 +1,27 @@
+.detailContainer{}
+.wrapperDetail{
+  padding: 50px;
+  display: flex;
+}
+.imgContainer{
+  flex: 1;
+}
+.imgDetail{
+  width: 100%;
+  height: 90vh;
+  object-fit: cover;
+}
+.infoContainer{
+  flex: 1;
+  padding: 0px 50px;
+}
+.title{
+  font-weight: 200;
+}
+.desc{
+  margin: 20px 0px;
+}
+.price{
+  font-weight: 100;
+  font-size: 40px;
+}

@@ -1,0 +1,31 @@
+.wrapper{
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo{
+  font-weight: bold;
+}
+.menuItem{
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 25px;
+}
+.left{
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.center{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.right{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
