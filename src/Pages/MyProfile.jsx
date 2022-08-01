@@ -18,7 +18,14 @@ export default function MyProfile() {
   const auth = useAuth();
 
   useEffect(() => {
-    let userAux = auth.user.displayName.split(' ')
+    let userAux = []
+    if(auth.user.displayName){
+      userAux = auth.user.displayName.split(' ')
+    }
+    else{
+      userAux[0] = ''
+      userAux[1] = ''
+    }
     setUser({
       firstName: userAux[0],
       lastName: userAux[1],

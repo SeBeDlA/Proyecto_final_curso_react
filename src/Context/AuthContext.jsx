@@ -20,7 +20,7 @@ const AuthContextProvider = ({children}) => {
   const loginWithGoogle = () =>{
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
-      .then(() => {navigate('/')})
+      .then(() => {navigate('/store/pag/1')})
       .catch(error => console.log(error))
   } 
 
@@ -29,7 +29,7 @@ const AuthContextProvider = ({children}) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredencial) => {
         // const user = userCredencial.user
-        navigate('/')
+        navigate('/store/pag/1')
       })
       .catch((error) => {console.log("[ERROR LOGIN] => ",error); setError({...error, loginError: error.message})})
   }
@@ -37,7 +37,7 @@ const AuthContextProvider = ({children}) => {
   const signup = (email, password) => {
     setError({...error,signupError: null})
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => navigate('/') )
+      .then(() => navigate('/store/pag/1') )
       .catch((error) => {console.log("[ERROR] => ",error);setError({...error, signupError: error.message})})
   }
 
